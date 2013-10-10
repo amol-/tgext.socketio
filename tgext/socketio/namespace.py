@@ -48,13 +48,20 @@ class SocketIOTGNamespace(BaseNamespace):
 
                 try:
                     params = DecoratedController._perform_validate(method, validate_params)
-                except TGValidationError as inv:
-                    error_dict = dict((key, str(error)) for key,error in inv.error_dict.items())
-                    self.error("invalid_method_args", error_dict)
-                    return
                 except validation_errors as inv:
-                    self.error("invalid_method_args", str(inv))
-                    return
+                    if deco.validation.error_handler:
+                        handler, output = DecoratedController._handle_validation_errors(method,
+                                                                                        args, {},
+                                                                                        inv, self)
+                        return output
+                    else:
+                        if isinstance(inv, TGValidationError):
+                            error_dict = inv.error_dict.items()
+                            error_dict = dict((key, str(error)) for key,error in error_dict)
+                            self.error("invalid_method_args", error_dict)
+                        else:
+                            self.error("invalid_method_args", str(inv))
+                        return
 
                 # Check if we need to decorate to handle exceptions
                 if hasattr(self, 'exception_handler_decorator'):
