@@ -20,18 +20,18 @@ correctly, remember to edit your ``development.ini`` and add::
 
     [server:main]
     use = egg:tgext.socketio#socketio
-    socketio-resource = socketio
+    socketio_resource = socketio
 
     host = 127.0.0.1
     port = 8080
 
 ``tgext.socketio#socketio`` is the server provided by tgext.socketio
-to correctly support SocketIO, while ``socketio-resource`` is the
+to correctly support SocketIO, while ``socketio_resource`` is the
 path of your ``SocketIOController`` class.
 
 By default ``socketio`` is used so you can mount a ``SocketIOController``
 subclass under the ``RootController`` or you can mount it in any other location
-and change your ``socketio-resource`` option.
+and change your ``socketio_resource`` option.
 
 Using SocketIOController
 ----------------------------------
@@ -104,7 +104,7 @@ The following is a very simple example that handles two type of events
         socketio = SocketIO()
 
 Keep in mind that the ``SocketIOController`` must be mounted in the same location
-specified by ``socketio-resource`` property in your configuration file.
+specified by ``socketio_resource`` property in your configuration file.
 
 Using Validators and Requirements
 =====================================
@@ -138,4 +138,33 @@ permission checks with a few lines of code::
                     self.emit('pong',{'sound':'bang!'})
             else:
                 self.emit('pong',{'sound':'pong'})
+
+
+PubSub Support
+---------------------------------------
+
+``tgext.socketio`` has builtin support for PubSub paradigm based
+on ``anypubsub`` library. If you want to use PubSub you should install
+anypubsub through ``pip install anypubsub`` or add it to your project
+dependencies.
+
+PubSub support works by subclassing from ``tgext.socketio.pubsub.PubSubTGNamespace``
+this special namespace permits clients to subscribe to channels using
+``socket.emit('subscribe', 'channel_name')`` from the javascript interface.
+
+Whenever an user subscribes to a channel, the PubSubTGNamespace subclass will receive
+a call for ``subscribe_channelname`` method, which can return if the user is permitted
+to subscribe to the given channel or not (``@require`` decorator can be used).
+The ``subscribe_channelname`` method can also return a different channel name if you want
+to specify a subchannel.
+
+For each message published on the subscribed channel PubSubTGNamespace will emit a
+``pubblication`` event, which can be trapped by the socket.io client to perform required
+actions.
+
+Publishing a message will be possible through ``PubSubTGNamespace.publish``.
+
+You can see a simple example providing a real time chat implemented on redis backend 
+in `examples/chat.py <https://raw.github.com/amol-/tgext.socketio/master/example/chat.py>`_
+
 

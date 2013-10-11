@@ -7,7 +7,7 @@ class DebugModeForbiddenException(Exception):
     pass
 
 def socketio_server_runner(wsgi_app, global_config, **kw):
-    ioresource = kw.get('socketio-resource', 'socketio')
+    ioresource = kw.get('socketio_resource', 'socketio')
     host = kw.get('host', '0.0.0.0')
     port = int(kw.get('port', 8080))
  
