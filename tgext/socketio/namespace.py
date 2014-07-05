@@ -15,7 +15,7 @@ class SocketIOTGNamespace(BaseNamespace):
     def is_method_allowed(self, method_name):
         method = getattr(self, method_name, None)
         if method is None:
-            return True # method not found case handled later
+            return True  # method not found case handled later
 
         deco = Decoration.get_decoration(default_im_func(method))
         try:

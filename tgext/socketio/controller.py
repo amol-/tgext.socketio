@@ -37,6 +37,6 @@ class SocketIOController(TGController):
             packet = json.loads(req.environ['wsgi.input'].read())
             namespace_instance.process_packet(packet)
         else:  # pragma: no cover
-            socketio_manage(request.environ, self._socketio_namespaces, request)
+            socketio_manage(req.environ, self._socketio_namespaces, req)
 
         return 'done'
