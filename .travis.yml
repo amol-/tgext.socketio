@@ -8,6 +8,7 @@ install:
   - "travis_retry pip install nose"
   - "travis_retry pip install coveralls"
   - "travis_retry pip install git+git://github.com/TurboGears/tg2.git@development"
+  - "travis_retry pip install -e ."
 
 script: "python setup.py nosetests"
 
