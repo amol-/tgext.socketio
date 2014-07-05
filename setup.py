@@ -11,7 +11,7 @@ version = "0.0.1"
 
 setup(name='tgext.socketio',
       version=version,
-      description="SocketIO support for TurboGears throught gevent-socketio",
+      description="SocketIO support for TurboGears through gevent-socketio",
       long_description=README,
       classifiers=[], # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
       keywords='turbogears2.extension, socketio, gevent',
@@ -20,10 +20,17 @@ setup(name='tgext.socketio',
       url='http://github.com/amol-/tgext.socketio',
       license='MIT',
       packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
+      namespace_packages=['tgext'],
       include_package_data=True,
       zip_safe=False,
       install_requires=[
           "gevent-socketio"
+      ],
+      test_suite='nose.collector',
+      tests_require=[
+          'TurboGears2',
+          'nose',
+          'mock',
       ],
       entry_points={
         'paste.server_runner': [
