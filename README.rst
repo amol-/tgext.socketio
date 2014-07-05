@@ -18,6 +18,9 @@ Running
 SocketIO support requires a custom GEvent based HTTP server to work
 correctly, remember to edit your ``development.ini`` and add::
 
+    # SOCKETIO doesn't work with debug mode
+    debug = false
+
     [server:main]
     use = egg:tgext.socketio#socketio
     socketio_resource = socketio
@@ -78,11 +81,11 @@ The following is a very simple example that handles two type of events
             <a class="ping" href="#" data-attack="error">Error</a>
         </div>
         <div id="result"></div>
-        <script src="/javascript/jquery.js"></script>
-        <script src="/javascript/socket.io.min.js"></script>
+        <script src="///cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
         <script>
         $(function(){
-            var socket = io.connect('/pingpong', {'resource':'giovanni'});
+            var socket = io.connect('/pingpong', {'resource':'socketio'});
             socket.on('pong',function(data){
                 $('#result').append(data.sound + '<br/>');
             });
@@ -115,6 +118,7 @@ Using Validators and Requirements
 The same example can be changed to provide validation and
 permission checks with a few lines of code::
 
+    from tg import validate, require, predicates
     from tg.validation import TGValidationError
     import random
 
