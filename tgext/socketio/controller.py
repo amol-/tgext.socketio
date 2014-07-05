@@ -33,7 +33,7 @@ class SocketIOController(TGController):
             if not namespace:
                 abort(406)
 
-            namespace_instance = namespace(req.environ, namespace_path)
+            namespace_instance = namespace(req.environ, namespace_path, req)
             packet = json.loads(req.environ['wsgi.input'].read())
             namespace_instance.process_packet(packet)
         else:  # pragma: no cover

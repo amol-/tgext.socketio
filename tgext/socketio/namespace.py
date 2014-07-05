@@ -20,7 +20,7 @@ class SocketIOTGNamespace(BaseNamespace):
         deco = Decoration.get_decoration(default_im_func(method))
         try:
             requirement = deco.requirement
-        except AttributeError:
+        except AttributeError:  # pragma: no cover
             raise UnsupportedTGVersionException('tgext.socketio requires at least '
                                                 'TurboGears 2.3.1')
 
