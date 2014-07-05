@@ -24,7 +24,8 @@ setup(name='tgext.socketio',
       include_package_data=True,
       zip_safe=False,
       install_requires=[
-          "gevent-socketio"
+          'gevent',
+          'gevent-socketio'
       ],
       test_suite='nose.collector',
       tests_require=[
