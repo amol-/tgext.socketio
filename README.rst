@@ -81,7 +81,7 @@ The following is a very simple example that handles two type of events
             <a class="ping" href="#" data-attack="error">Error</a>
         </div>
         <div id="result"></div>
-        <script src="///cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
         <script>
         $(function(){
