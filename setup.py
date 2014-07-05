@@ -30,6 +30,7 @@ setup(name='tgext.socketio',
       test_suite='nose.collector',
       tests_require=[
           'TurboGears2',
+          'repoze.who',
           'nose',
           'mock',
       ],
