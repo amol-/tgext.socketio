@@ -164,7 +164,7 @@ actions.
 
 Publishing a message will be possible through ``PubSubTGNamespace.publish``.
 
-You can see a simple example providing a real time chat implemented on redis backend 
+You can see a simple example providing a real time chat implemented on redis backend
 in `examples/chat.py <https://raw.github.com/amol-/tgext.socketio/master/example/chat.py>`_
 
 
