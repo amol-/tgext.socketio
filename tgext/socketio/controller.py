@@ -1,3 +1,4 @@
+import json
 from tg import TGController, expose, request, abort
 from socketio import socketio_manage
 from socketio.namespace import BaseNamespace
@@ -19,8 +20,23 @@ class SocketIOController(TGController):
     @expose()
     def _default(self, *args, **kw):
         req = request._current_obj()
+
         if 'socketio' not in req.environ:
             abort(406)
 
-        socketio_manage(request.environ, self._socketio_namespaces, request)
+        if 'paste.testing_variables' in req.environ:
+            # We are in a test unit called by WebTest
+            # simulate a socketio server by directly sending
+            # data from wsgi.input to the namespace
+            namespace_path = '/' + args[0]
+            namespace = self._socketio_namespaces.get(namespace_path)
+            if not namespace:
+                abort(406)
+
+            namespace_instance = namespace(req.environ, namespace_path)
+            packet = json.loads(req.environ['wsgi.input'].read())
+            namespace_instance.process_packet(packet)
+        else:  # pragma: no cover
+            socketio_manage(request.environ, self._socketio_namespaces, request)
+
         return 'done'
