@@ -15,9 +15,10 @@ class PubSubTGNamespace(SocketIOTGNamespace):
 
         if pubsub is None:
             PUBSUB_CREATION_LOCK.acquire()
+            pubsub = getattr(globals, 'anypubsub', None)
             if pubsub is None:
                 pubsub = create_pubsub_from_settings(config, prefix='anypubsub.')
-                globals.pubsub = pubsub
+                globals.anypubsub = pubsub
             PUBSUB_CREATION_LOCK.release()
 
         return pubsub
@@ -43,6 +44,7 @@ class PubSubTGNamespace(SocketIOTGNamespace):
             self.spawn(self._listen, channel)
             return True
 
+        self.error('subscription_rejected', 'Your subscription has been rejected by server')
         return False
 
     def publish(self, channel, message):

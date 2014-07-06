@@ -84,6 +84,7 @@ def configure_app(namespace):
     app_cfg = AppConfig(minimal=True, root_controller=RootController())
     app_cfg.sa_auth.authmetadata = TestAuthMetadata()
     app_cfg['beaker.session.secret'] = 'SECRET'
+    app_cfg['anypubsub.backend'] = 'memory'
     app_cfg.auth_backend = 'ming'
 
     return app_cfg

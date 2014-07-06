@@ -34,6 +34,7 @@ class SocketIOController(TGController):
                 abort(406)
 
             namespace_instance = namespace(req.environ, namespace_path, req)
+            req.environ['socketio.namespace'] = namespace_instance
             packet = json.loads(req.environ['wsgi.input'].read())
             namespace_instance.process_packet(packet)
         else:  # pragma: no cover
