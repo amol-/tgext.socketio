@@ -35,6 +35,7 @@ setup(name='tgext.socketio',
           'nose',
           'coverage',
           'mock',
+          'pastedeploy'
       ],
       entry_points={
         'paste.server_runner': [
