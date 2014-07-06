@@ -33,6 +33,7 @@ setup(name='tgext.socketio',
           'WebTest==1.4.3',
           'repoze.who',
           'nose',
+          'coverage',
           'mock',
       ],
       entry_points={
