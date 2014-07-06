@@ -36,7 +36,8 @@ setup(name='tgext.socketio',
           'coverage',
           'mock',
           'pastedeploy',
-          'formencode'
+          'formencode',
+          'anypubsub'
       ],
       entry_points={
         'paste.server_runner': [
