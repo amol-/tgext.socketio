@@ -3,8 +3,10 @@ from gevent import reinit
 from socketio.server import SocketIOServer
 from paste.deploy.converters import asbool
 
+
 class DebugModeForbiddenException(Exception):
     pass
+
 
 def socketio_server_runner(wsgi_app, global_config, **kw):
     ioresource = kw.get('socketio_resource', 'socketio')
