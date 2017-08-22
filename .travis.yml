@@ -1,19 +1,12 @@
 language: python
 sudo: false
 python:
-  - "2.6"
   - "2.7"
-  - "3.3"
-  - "3.4"
-  - "3.5"
-  - "3.6"
 
 install:
-  - "travis_retry pip install coverage"
-  - "travis_retry pip install nose"
   - "travis_retry pip install coveralls"
   - "travis_retry pip install git+git://github.com/TurboGears/tg2.git@development"
-  - "travis_retry pip install -e ."
+  - "travis_retry pip install -e .[testing]"
 
 script: "python setup.py nosetests"
 
