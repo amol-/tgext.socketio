@@ -9,6 +9,18 @@ except IOError:
 
 version = "0.0.1"
 
+TEST_REQUIREMENTS = [
+    'TurboGears2',
+    'WebTest==1.4.3',
+    'repoze.who',
+    'nose',
+    'coverage',
+    'mock',
+    'pastedeploy',
+    'formencode',
+    'anypubsub'
+]
+
 setup(name='tgext.socketio',
       version=version,
       description="SocketIO support for TurboGears through gevent-socketio",
@@ -24,21 +36,14 @@ setup(name='tgext.socketio',
       include_package_data=True,
       zip_safe=False,
       install_requires=[
-          'gevent',
+          'gevent<1.2.0',
           'gevent-socketio'
       ],
       test_suite='nose.collector',
-      tests_require=[
-          'TurboGears2',
-          'WebTest==1.4.3',
-          'repoze.who',
-          'nose',
-          'coverage',
-          'mock',
-          'pastedeploy',
-          'formencode',
-          'anypubsub'
-      ],
+      tests_require=TEST_REQUIREMENTS,
+      extras_require={
+        'testing': TEST_REQUIREMENTS,
+      },
       entry_points={
         'paste.server_runner': [
             'socketio = tgext.socketio.server:socketio_server_runner'

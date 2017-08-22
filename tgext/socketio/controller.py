@@ -22,7 +22,7 @@ class SocketIOController(TGController):
         req = request._current_obj()
 
         if 'socketio' not in req.environ:
-            abort(406)
+            abort(400)
 
         if 'paste.testing_variables' in req.environ:
             # We are in a test unit called by WebTest
@@ -31,7 +31,7 @@ class SocketIOController(TGController):
             namespace_path = '/' + args[0]
             namespace = self._socketio_namespaces.get(namespace_path)
             if not namespace:
-                abort(406)
+                abort(400)
 
             namespace_instance = namespace(req.environ, namespace_path, req)
             req.environ['socketio.namespace'] = namespace_instance

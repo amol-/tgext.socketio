@@ -32,11 +32,11 @@ class TestSocketIODispatch(object):
 
     def test_invalid_request_notsocketio(self):
         app = create_app(configure_app(PingPong))
-        resp = app.request('/socketio/test', environ={'mocksocketio': 'false'}, status=406)
+        resp = app.request('/socketio/test', environ={'mocksocketio': 'false'}, status=400)
 
     def test_invalid_request_nonamespace(self):
         app = create_app(configure_app(PingPong))
-        resp = app.request('/socketio/none', status=406)
+        resp = app.request('/socketio/none', status=400)
 
     def test_method_not_found(self):
         app = create_app(configure_app(PingPong))
