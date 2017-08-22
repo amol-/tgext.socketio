@@ -7,11 +7,8 @@ About tgext.socketio
 .. image:: https://coveralls.io/repos/amol-/tgext.socketio/badge.png
     :target: https://coveralls.io/r/amol-/tgext.socketio
 
-.. image:: https://pypip.in/v/tgext.socketio/badge.png
-   :target: https://pypi.python.org/pypi/tgext.socketio
-
-.. image:: https://pypip.in/d/tgext.socketio/badge.png
-   :target: https://pypi.python.org/pypi/tgext.socketio
+.. image:: https://img.shields.io/pypi/pyversions/tgext.socketio.svg
+    :target: https://pypi.python.org/pypi/tgext.socketio
 
 tgext.socketio provides an easy way to implement SocketIO in TurboGears2.
 SocketIO support is provided by gevent-socketio and specific SocketIO server
