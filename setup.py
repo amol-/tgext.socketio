@@ -7,7 +7,7 @@ try:
 except IOError:
     README = ''
 
-version = "0.0.2"
+version = "0.0.3"
 
 TEST_REQUIREMENTS = [
     'TurboGears2',
@@ -43,7 +43,7 @@ setup(name='tgext.socketio',
       include_package_data=True,
       zip_safe=False,
       install_requires=[
-          'gevent<1.2.0',
+          'gevent<1.1.0',
           'gevent-socketio'
       ],
       test_suite='nose.collector',
